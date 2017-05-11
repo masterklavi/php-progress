@@ -47,8 +47,8 @@ or download the package at https://github.com/masterklavi/phpprogress/archive/ma
 
 ## Small Documentation
 
-`Progress::__construct($max)` where `$max` - max value (count of tasks)
-`Progress::show($offset_or_value = 1, $progress_type = Progress::TYPE_OFFSET)` where `$progress_type` can be `Progress::TYPE_OFFSET` or `Progress::TYPE_VALUE`
+- `Progress::__construct($max)` where `$max` - max value (count of tasks)
+- `Progress::show($offset_or_value = 1, $progress_type = Progress::TYPE_OFFSET)` where `$progress_type` can be `Progress::TYPE_OFFSET` or `Progress::TYPE_VALUE`
 
 ```PHP
 $progress = new Progress(10);
