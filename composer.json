@@ -1,0 +1,20 @@
+{
+    "name": "masterklavi/phpprogress",
+    "description": "Here is a PHP function that shows progress in nice view in command-line interface (CLI)",
+    "type": "package",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "authors": [
+        {
+            "name": "Master Klavi",
+            "email": "masterklavi@gmail.com",
+            "homepage": "http://masterklavi.ru/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "phprequest\\": "lib"
+        }
+    }
+}
