@@ -3,7 +3,7 @@
 
 Using it you can give nice progress view in command-line interface (CLI)
 
-## Examples
+## Example
 
 ```PHP
 use masterklavi\phpprogress\Progress;
@@ -43,3 +43,17 @@ Clone git repository:
 $ git clone https://github.com/masterklavi/phpprogress.git
 ```
 or download the package at https://github.com/masterklavi/phpprogress/archive/master.zip
+
+
+## Small Documentation
+
+`Progress::__construct($max)` where `$max` - max value (count of tasks)
+`Progress::show($offset_or_value = 1, $progress_type = Progress::TYPE_OFFSET)` where `$progress_type` can be `Progress::TYPE_OFFSET` or `Progress::TYPE_VALUE`
+
+```PHP
+$progress = new Progress(10);
+$progress->show(); // offset = 1, so value = 1
+$progress->show(2); // offset = 2, so value = 3
+$progress->show(6, Progress::TYPE_VALUE); // value = 6
+$progress->show(4); // offset = 2, so value = 10
+```
