@@ -25,3 +25,21 @@ for ($i = 0; $i < 500; $i++)
 ## Requirements
 
 - PHP version 5.4.0 or higher
+
+
+## Installation
+
+### Using Composer
+
+Get the package:
+```
+$ composer require masterklavi/phpprogress
+```
+
+### Manual Installation
+
+Clone git repository:
+```
+$ git clone https://github.com/masterklavi/phpprogress.git
+```
+or download the package at https://github.com/masterklavi/phpprogress/archive/master.zip
