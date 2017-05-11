@@ -37,7 +37,21 @@ class Progress
      */
     public function __construct($max)
     {
-        $this->setMax($max);
+        // set max
+        
+        if (ctype_digit((string)$max) == false)
+        {
+            throw new \Exception('Max value must contain digits only (integer, positive)');
+        }
+
+        if ($max == 0)
+        {
+            throw new \Exception('Max value must be greater than zero');
+        }
+
+        $this->max = (int)$max;
+
+        // set line_width
 
         $cols = (int)shell_exec('tput cols');
 
@@ -52,25 +66,6 @@ class Progress
         }
         
         $this->line_width = $cols - 30;
-    }
-
-    /**
-     * Sets maximum value
-     * @param integer $max
-     */
-    public function setMax($max)
-    {
-        if (ctype_digit((string)$max) == false)
-        {
-            throw new \Exception('Max value must contain digits only (integer, positive)');
-        }
-
-        if ($max == 0)
-        {
-            throw new \Exception('Max value must be greater than zero');
-        }
-        
-        $this->max = (int)$max;
     }
 
     /**
