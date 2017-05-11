@@ -31,6 +31,10 @@ class Progress
     const TYPE_OFFSET = 1;
     const TYPE_VALUE = 2;
 
+    const STATUS_OK = '.';
+    const STATUS_SKIP = '_';
+    const STATUS_FAIL = 'F';
+
     /**
      * Initializes a new object
      * @param integer $max
@@ -73,7 +77,7 @@ class Progress
      * @param integer $offset_or_value
      * @param integer $progress_type
      */
-    public function show($offset_or_value = 1, $progress_type = self::TYPE_OFFSET)
+    public function show($offset_or_value = 1, $progress_type = self::TYPE_OFFSET, $status = self::STATUS_OK)
     {
         if ($progress_type === self::TYPE_OFFSET)
         {
@@ -90,7 +94,7 @@ class Progress
 
         if ($this->out_of_range)
         {
-            print str_repeat('.', $offset);
+            print str_repeat($status, $offset);
             return;
         }
 
@@ -106,7 +110,7 @@ class Progress
             $this->out_of_range = true;
             print PHP_EOL;
             print 'OUT OF RANGE: ';
-            print str_repeat('.', $offset);
+            print str_repeat($status, $offset);
             return;
         }
 
@@ -119,7 +123,7 @@ class Progress
             $start_value = $this->value;
         }
 
-        print str_repeat('.', $offset);
+        print str_repeat($status, $offset);
 
         if ($this->value % $this->line_width === 0 && $this->value > 0)
         {
