@@ -28,6 +28,9 @@ class Progress
      */
     protected $out_of_range = false;
 
+    const TYPE_OFFSET = 1;
+    const TYPE_VALUE = 2;
+
     /**
      * Initializes a new object
      * @param integer $max
@@ -71,29 +74,46 @@ class Progress
     }
 
     /**
-     * Shows progress by offset
-     * @param integer $offset
+     * Shows progress
+     * @param integer $offset_or_value
+     * @param integer $progress_type
      */
-    public function show($offset = 1)
+    public function show($offset_or_value = 1, $progress_type = self::TYPE_OFFSET)
     {
+        if ($progress_type === self::TYPE_OFFSET)
+        {
+            $offset = (int)$offset_or_value;
+        }
+        elseif ($progress_type === self::TYPE_VALUE)
+        {
+            $offset = $offset_or_value - $this->value;
+        }
+        else
+        {
+            throw new Exception('Unknown type');
+        }
+
+        if ($this->out_of_range)
+        {
+            print str_repeat('.', $offset);
+            return;
+        }
+
+        if ($offset <= 0 || !is_int($offset))
+        {
+            return;
+        }
+
         $this->value += $offset;
 
         if ($this->value > $this->max)
         {
-            if ($this->out_of_range === false)
-            {
-                $this->out_of_range = true;
-                print PHP_EOL;
-                print 'OUT OF RANGE: ';
-            }
-            else
-            {
-                print str_repeat('.', $offset);
-                return;
-            }
+            $this->out_of_range = true;
+            print PHP_EOL;
+            print 'OUT OF RANGE: ';
+            print str_repeat('.', $offset);
+            return;
         }
-
-        print str_repeat('.', $offset);
 
         static $start_time = null;
         static $start_value = null;
@@ -103,6 +123,8 @@ class Progress
             $start_time = microtime(true);
             $start_value = $this->value;
         }
+
+        print str_repeat('.', $offset);
 
         if ($this->value % $this->line_width === 0 && $this->value > 0)
         {
